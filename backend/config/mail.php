@@ -37,16 +37,22 @@ return [
 
     'mailers' => [
 
-        'smtp' => [
+        'user' => [
             'transport' => 'smtp',
-            'scheme' => env('MAIL_SCHEME'),
-            'url' => env('MAIL_URL'),
-            'host' => env('MAIL_HOST', '127.0.0.1'),
-            'port' => env('MAIL_PORT', 2525),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
+            'host' => env('USER_MAIL_HOST', '127.0.0.1'),
+            'port' => env('USER_MAIL_PORT', 2525),
+            'username' => env('USER_MAIL_USERNAME'),
+            'password' => env('USER_MAIL_PASSWORD'),
             'timeout' => null,
-            'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url((string) env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
+        ],
+
+        'admin' => [
+            'transport' => 'smtp',
+            'host' => env('ADMIN_MAIL_HOST', '127.0.0.1'),
+            'port' => env('ADMIN_MAIL_PORT', 2525),
+            'username' => env('ADMIN_MAIL_USERNAME'),
+            'password' => env('ADMIN_MAIL_PASSWORD'),
+            'timeout' => null,
         ],
 
         'ses' => [
