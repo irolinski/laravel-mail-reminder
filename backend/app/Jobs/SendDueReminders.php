@@ -22,13 +22,14 @@ class SendDueReminders implements ShouldQueue
 
         foreach ($dueReminders as $reminder) {
             try {
-                Mail::mailer('user')->raw($reminder->message, function($message) use ($reminder){
+                Mail::mailer('user')->raw($reminder->message ?? "This is a reminder message sent by mailReminder." , function($message) use ($reminder){
                     $message->to($reminder->email)
-                    ->subject('Reminder');
+                    ->subject($reminder->sunject ?? "Reminder");
                 });
 
                 $reminder->sent = true;
                 $reminder->save();
+                Log::info("Successfully sent a reminder of num {$reminder->id}.");
             } catch (\Exception $e){
                 Log::error("Failed to send reminder #{$reminder->id} to {$reminder->email}: ".$e->getMessage());
             }

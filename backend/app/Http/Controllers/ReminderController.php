@@ -10,10 +10,11 @@ class ReminderController extends Controller
     public function store(Request $request) {
         $validated = $request->validate([
             'email'=>'required|email',
-            'message'=>'required|string',
-            'send_at'=>'required|date|after:now'
+            'subject' => 'nullable|string|max:200',
+            'message'=>'nullable|string|max:300',
+            'send_at'=>'required|date|after:now',
         ]);
-
+        
         $reminder = Reminder::create($validated);
 
         return response()->json([
