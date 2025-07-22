@@ -9,6 +9,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test', function () {
+    return 'Testing Testing Testing';
+});
+
 
 Route::get('/run-schedule', function() {
     abort_unless(request('token') === env('CRON_TOKEN'), 403);
